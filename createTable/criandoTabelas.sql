@@ -51,6 +51,17 @@ CREATE TABLE pedidos(
     id TEXT PRIMARY KEY,
     idcliente TEXT,
     datahorapedido DATETIME,
-    status VARCHAR(50)
-)
+    status VARCHAR(50),
+    FOREIGN KEY (idcliente) REFERENCES clientes(id) ON DELETE CASCADE
+);
+
 --Itens Pedidos
+CREATE TABLE itensPedidos(
+    idpedido TEXT,
+    idproduto TEXT,
+    quantidade INTEGER,
+    precounitario DECIMAL (10,2),
+    PRIMARY KEY (idpedido, idproduto),
+    FOREIGN KEY (idpedido) REFERENCES pedidos(id) ON DELETE CASCADE,
+    FOREIGN KEY (idproduto) REFERENCES produtos(id) ON DELETE CASCADE
+)
